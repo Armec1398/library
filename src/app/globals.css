@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+*{
+  font-family: 'IRANSans';
+}
+@font-face {
+	font-family: 'Vazirmatn-FD';
+	src: url('/fonts/Vazir-Regular-FD-WOL.woff2') format('woff2');
+	font-display: swap;
+  }
+
+.fa-number{
+  font-family: 'Vazirmatn-FD';
+}
+
+body {
+  color: var(--background);
+  background: var(--foreground);
+  font-family: 'IRANSans';
+  direction: rtl;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+.nav-item a{
+  color: #000;
+  text-decoration: none;
+  font-family: 'IRANSans';
+}
+.btn.show{
+  border: none;
+  background: transparent;
+}
+.dropdown a{
+  text-decoration: none;
+}
+
+.modal-overlay { 
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  z-index: 9999; 
+} 
+ 
+.modal { 
+  background-color: #fff;
+  width: 40%; 
+  border-radius: 16px; 
+  padding: 20px; 
+  position: relative; 
+  z-index: 10000; 
+}
