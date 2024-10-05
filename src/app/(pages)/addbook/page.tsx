@@ -15,9 +15,11 @@ export default function AddBook() {
   const [genre, setGenre] = useState("");
   const [summary, setSummary] = useState("");
   const [imageSrc, setImageSrc] = useState<string | null>(null);
-  const [books, setBooks] = useState<Book[]>([]); // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [, setBooks] = useState<Book[]>([]);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [file, setFile] = useState<File | null>(null); // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [, setFile] = useState<File | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   // زمانی که modalIsOpen تغییر کند، به body کلاس no-scroll اضافه یا حذف می‌شود
