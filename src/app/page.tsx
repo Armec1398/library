@@ -6,10 +6,10 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="container py-5">
-        <h1 className="text-2xl border-r-4 pr-4 mb-5 border-red-700">لیست کتاب ها</h1>
+      <div className="container mx-auto py-5">
         <Books />
       </div>
+      
     </>
   );
 }

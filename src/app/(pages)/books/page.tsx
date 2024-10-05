@@ -111,10 +111,13 @@ export default function BooksPage() {
 
   return (
     <>
+    <div className="container mx-auto py-5">
+      <h1 className="text-2xl border-r-4 pr-4 mb-5 border-red-700">لیست کتاب ها <span className='fa-number'>({books.length})</span></h1>
+    </div>
     {!books && (
       <div>
         <h4>هیچ کتابی اضافه نشده است لطفا از کتاب جدید اضافه کنید.</h4>
-        <Link href="/addbook" className='bg-blue-500 text-white px-2 py-1 rounded-md mt-2'></Link>
+        <Link href="/addbook" className='bg-blue-500 text-white px-2 py-1 rounded-md mt-2'>افزودن کتاب جدید</Link>
       </div>
     )}
     {books && (
@@ -135,44 +138,49 @@ export default function BooksPage() {
             <div className="p-3">
               {editBookId === book.id ? (
                 <div>
+                  <h3 className="text-sm">نام کتاب:</h3>
                   <input
                     type="text"
                     name="title"
                     value={editFormData?.title}
                     onChange={handleEditChange}
                     placeholder="نام کتاب"
-                    className="border rounded-md w-full"
+                    className="border rounded-md w-full text-sm py-1 px-2"
                   />
+                  <h3 className="text-sm mt-2"> نویسنده:</h3>
                   <input
                     type="text"
                     name="author"
                     value={editFormData?.author}
                     onChange={handleEditChange}
                     placeholder="نویسنده"
-                    className="border rounded-md w-full mt-2"
+                    className="border rounded-md w-full text-sm py-1 px-2"
                   />
+                  <h3 className="text-sm mt-2"> سال انتشار:</h3>
                   <input
                     type="text"
                     name="publication_year"
                     value={editFormData?.publication_year}
                     onChange={handleEditChange}
                     placeholder="سال انتشار"
-                    className="border rounded-md w-full mt-2"
+                    className="border rounded-md w-full text-sm py-1 px-2 fa-number"
                   />
+                  <h3 className="text-sm mt-2"> ژانر:</h3>
                   <input
                     type="text"
                     name="genre"
                     value={editFormData?.genre.join(', ')}
                     onChange={handleEditChange}
                     placeholder="ژانر"
-                    className="border rounded-md w-full mt-2"
+                    className="border rounded-md w-full text-sm py-1 px-2"
                   />
+                  <h3 className="text-sm mt-2"> خلاصه کتاب:</h3>
                   <textarea
                     name="description"
                     value={editFormData?.description}
                     onChange={handleEditChange}
                     placeholder="خلاصه"
-                    className="border rounded-md w-full mt-2"
+                    className="border rounded-md w-full text-sm py-1 px-2 resize-none"
                   />
                   <button
                     className="bg-green-500 text-white px-2 py-1 rounded-md mt-2"
@@ -183,11 +191,11 @@ export default function BooksPage() {
                 </div>
               ) : (
                 <>
-                  <h2 className="text-lg">نام کتاب: {book.title}</h2>
-                  <h3 className="text-sm">نویسنده: {book.author}</h3>
-                  <h3 className="text-sm">سال انتشار: {book.publication_year}</h3>
-                  <h3 className="text-sm">ژانر: {book.genre.join(', ')}</h3>
-                  <p className="text-xs">خلاصه کتاب: {book.description}</p>
+                  <h2 className="text-lg mb-3">نام کتاب: {book.title}</h2>
+                  <h3 className="text-xs mb-2">نویسنده: {book.author}</h3>
+                  <h3 className="text-xs mb-2">سال انتشار: <span className='fa-number'>{book.publication_year}</span></h3>
+                  <h3 className="text-xs mb-2">ژانر: {book.genre.join(', ')}</h3>
+                  <p className="text-xs mb-2">خلاصه کتاب: {book.description}</p>
                   <button
                     className="bg-blue-500 text-white px-2 py-1 rounded-md mt-2 ml-2"
                     onClick={() => handleEditClick(book)}

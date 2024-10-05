@@ -16,6 +16,15 @@
 *{
   font-family: 'IRANSans';
 }
+@font-face {
+	font-family: 'Vazirmatn-FD';
+	src: url('/fonts/Vazir-Regular-FD-WOL.woff2') format('woff2');
+	font-display: swap;
+  }
+
+.fa-number{
+  font-family: 'Vazirmatn-FD';
+}
 
 body {
   color: var(--background);

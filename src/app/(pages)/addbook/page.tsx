@@ -21,6 +21,7 @@ export default function AddBook() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [, setFile] = useState<File | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
   // زمانی که modalIsOpen تغییر کند، به body کلاس no-scroll اضافه یا حذف می‌شود
   useEffect(() => {
@@ -124,6 +125,14 @@ export default function AddBook() {
     setFile(null);
   };
 
+  useEffect(() => {
+    if (title && author && year && genre && summary && croppedImage) {
+      setIsSubmitDisabled(false);
+    } else {
+      setIsSubmitDisabled(true);
+    }
+  }, [title, author, year, genre, summary, croppedImage]);
+
 
   return (
     <>
@@ -145,7 +154,7 @@ export default function AddBook() {
             onChange={(e) => setAuthor(e.target.value)}
           />
           <input
-            className="border-2 border-gray-300 hover:bg-gray-200 rounded-md bg-gray-300 placeholder:text-black py-2 px-3 h-fit"
+            className="border-2 border-gray-300 hover:bg-gray-200 rounded-md bg-gray-300 placeholder:text-black py-2 px-3 h-fit fa-number"
             type="text"
             placeholder="سال انتشار"
             value={year}
@@ -257,6 +266,7 @@ export default function AddBook() {
         <button
           className="bg-green-700 hover:bg-green-600 px-4 py-2 my-4 rounded-md text-white"
           onClick={handleSubmit}
+          disabled={isSubmitDisabled}
         >
           ثبت
         </button>
