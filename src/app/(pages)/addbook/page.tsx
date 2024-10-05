@@ -6,6 +6,7 @@ import Cropper from "react-easy-crop";
 import { getCroppedImg } from "./cropImage"; // متد کمکی برای برش تصویر
 import { Header } from "@/app/components/header.tsx/header";
 import { Book } from "../books/page";
+import { Area } from "react-easy-crop";
 
 export default function AddBook() {
   const [title, setTitle] = useState("");
@@ -14,9 +15,9 @@ export default function AddBook() {
   const [genre, setGenre] = useState("");
   const [summary, setSummary] = useState("");
   const [imageSrc, setImageSrc] = useState<string | null>(null);
-  const [books, setBooks] = useState<Book[]>([]);
+  const [books, setBooks] = useState<Book[]>([]); // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [file, setFile] = useState<File | null>(null);
+  const [file, setFile] = useState<File | null>(null); // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   // زمانی که modalIsOpen تغییر کند، به body کلاس no-scroll اضافه یا حذف می‌شود
@@ -34,23 +35,26 @@ export default function AddBook() {
   }, [modalIsOpen]);
 
   const handleOpenFileInput = () => {
-    inputRef.current.click();
+    if (inputRef.current) {
+      inputRef.current.click();
+    }
   };
 
   // حالت‌های مربوط به برش تصویر
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
   const [croppedImage, setCroppedImage] = useState<string | null>(null);
   const [showCropButton, setShowCropButton] = useState(false);
 
   const onCropComplete = useCallback(
-    (croppedArea: any, croppedAreaPixels: React.SetStateAction<null>) => {
-      setCroppedAreaPixels(croppedAreaPixels);
+    (croppedArea: Area, croppedAreaPixels: Area) => {
+      setCroppedAreaPixels(croppedAreaPixels); // اینجا نوع Area صحیح است
       setShowCropButton(true);
     },
     []
   );
+  
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -67,7 +71,7 @@ export default function AddBook() {
 
   const handleCrop = async () => {
     try {
-      if (imageSrc && croppedAreaPixels) {
+      if (imageSrc && croppedAreaPixels) { // بررسی می‌کنیم که croppedAreaPixels تهی نباشد
         const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels, {
           width: 300,
           height: 300,
@@ -81,7 +85,7 @@ export default function AddBook() {
     }
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const newBook = {
       title,

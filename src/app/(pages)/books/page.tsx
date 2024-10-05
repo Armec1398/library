@@ -83,6 +83,8 @@ export default function BooksPage() {
 
   // پیاده‌سازی IntersectionObserver برای مشاهده کارت آخری
   useEffect(() => {
+    const currentObserverRef = observerRef.current; // ذخیره‌سازی مقدار فعلی ref
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !loading) {
@@ -95,13 +97,13 @@ export default function BooksPage() {
       }
     );
 
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
+    if (currentObserverRef) {
+      observer.observe(currentObserverRef);
     }
 
     return () => {
-      if (observerRef.current) {
-        observer.unobserve(observerRef.current);
+      if (currentObserverRef) {
+        observer.unobserve(currentObserverRef);
       }
     };
   }, [loading]);
