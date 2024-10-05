@@ -23,9 +23,9 @@ export default function BooksPage() {
   const [editFormData, setEditFormData] = useState<Book | null>(null);
   const observerRef = useRef<HTMLDivElement | null>(null);
 
-  const fetchBooks = () => {
+  const fetchBooks = async () => {
     setLoading(true);
-    axios
+    await axios
       .get('http://localhost:5000/books')
       .then((res) => {
         setBooks(res.data);
