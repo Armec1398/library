@@ -31,7 +31,9 @@ export const Header=()=>{
                         </div>
                     </div>
                     <div className="w-full sm:w-1/6 flex sm:order-first">
-                        <Image src="/images/logo.png" alt="لوگو" width={40} height={40}/>
+                        <Link href="/">
+                            <Image src="/images/logo.png" alt="لوگو" width={40} height={40}/>
+                        </Link>
                     </div>
                     
                     <div className="w-full sm:w-1/6 flex justify-end sm:order-3">
