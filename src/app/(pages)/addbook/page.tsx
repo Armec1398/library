@@ -203,7 +203,7 @@ export default function AddBook() {
 
         {modalIsOpen && (
           <div className="modal-overlay">
-            <div className="modal text-center">
+            <div className="modal w-[90%] sm:w-[40%] text-center">
               {imageSrc ? (
                 <div className="mt-4">
                   <div className="relative w-full h-[500px]">
