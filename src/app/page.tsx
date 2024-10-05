@@ -1,7 +1,6 @@
 "use client"
 import Books from "./(pages)/books/page";
 import { Header } from "./components/header.tsx/header";
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Home() {
   return (
