@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
 import { Blocks } from 'react-loader-spinner';
+import Link from 'next/link';
 
 export interface Book {
   id: number;
@@ -110,6 +111,13 @@ export default function BooksPage() {
 
   return (
     <>
+    {!books && (
+      <div>
+        <h4>هیچ کتابی اضافه نشده است لطفا از کتاب جدید اضافه کنید.</h4>
+        <Link href="/addbook" className='bg-blue-500 text-white px-2 py-1 rounded-md mt-2'></Link>
+      </div>
+    )}
+    {books && (
       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-col-6 grid-cols-2 gap-4">
         {books.slice(0, visibleCount).map((book, index) => (
           <div
@@ -198,6 +206,7 @@ export default function BooksPage() {
           </div>
         ))}
       </div>
+    )}
       {loading && (
         <Blocks
           height="80"

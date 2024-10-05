@@ -8,7 +8,7 @@ export default function Home() {
     <>
       <Header />
       <div className="container py-5">
-        <h1 className="text-2xl border-r-4 pr-4 mb-5 border-red-700">لیست دسته بندی ها</h1>
+        <h1 className="text-2xl border-r-4 pr-4 mb-5 border-red-700">لیست کتاب ها</h1>
         <Books />
       </div>
     </>
