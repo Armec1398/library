@@ -195,7 +195,7 @@ export default function AddBook() {
         {modalIsOpen && (
           <div className="modal-overlay">
             <div className="modal text-center">
-              {imageSrc && (
+              {imageSrc ? (
                 <div className="mt-4">
                   <div className="relative w-full h-[500px]">
                     <Cropper
@@ -225,8 +225,8 @@ export default function AddBook() {
                     </div>
                   )}
                 </div>
-              )}
-              {!showCropButton &&(
+              ):
+              (
                 <>
                   <label onClick={handleOpenFileInput}>
                     <button className="bg-blue-700 hover:bg-blue-600 px-4 py-2 my-4 rounded-md text-white">
