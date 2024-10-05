@@ -114,7 +114,7 @@ export default function BooksPage() {
     <div className="container mx-auto py-5">
       <h1 className="text-2xl border-r-4 pr-4 mb-5 border-red-700">لیست کتاب ها <span className='fa-number'>({books.length})</span></h1>
     </div>
-    {!books && (
+    {books.length===0 && (
       <div>
         <h4>هیچ کتابی اضافه نشده است لطفا از کتاب جدید اضافه کنید.</h4>
         <Link href="/addbook" className='bg-blue-500 text-white px-2 py-1 rounded-md mt-2'>افزودن کتاب جدید</Link>
