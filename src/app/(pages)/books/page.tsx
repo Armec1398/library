@@ -116,7 +116,7 @@ export default function BooksPage() {
     </div>
     {books.length===0 && (
       <div>
-        <h4>هیچ کتابی اضافه نشده است لطفا از کتاب جدید اضافه کنید.</h4>
+        <h4 className='mb-4'>هیچ کتابی اضافه نشده است لطفا از کتاب جدید اضافه کنید.</h4>
         <Link href="/addbook" className='bg-blue-500 text-white px-2 py-1 rounded-md mt-2'>افزودن کتاب جدید</Link>
       </div>
     )}
