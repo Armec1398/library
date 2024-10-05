@@ -21,7 +21,14 @@ export default function AddBook() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [, setFile] = useState<File | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+  const [errors, setErrors] = useState({
+    title: "",
+    author: "",
+    year: "",
+    genre: "",
+    summary: "",
+    file: "",
+  });
 
   // زمانی که modalIsOpen تغییر کند، به body کلاس no-scroll اضافه یا حذف می‌شود
   useEffect(() => {
@@ -90,6 +97,23 @@ export default function AddBook() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const newErrors = {
+      title: title ? "" : "این فیلد اجباری است",
+      author: author ? "" : "این فیلد اجباری است",
+      year: year ? "" : "این فیلد اجباری است",
+      genre: genre ? "" : "این فیلد اجباری است",
+      summary: summary ? "" : "این فیلد اجباری است",
+      file: croppedImage ? "" : "لطفاً یک فایل انتخاب کنید", // چک کردن انتخاب فایل
+    };
+  
+    setErrors(newErrors);
+  
+    // بررسی آیا خطایی وجود دارد یا نه
+    const hasErrors = Object.values(newErrors).some((error) => error !== "");
+    if (hasErrors) {
+      return;
+    }
     const newBook = {
       title,
       author,
@@ -112,6 +136,14 @@ export default function AddBook() {
       setSummary("");
       setImageSrc(null);
       setCroppedImage(null);
+      setErrors({
+        title: "",
+        author: "",
+        year: "",
+        genre: "",
+        summary: "",
+        file: "",
+      });
     } catch (error) {
       console.error("خطا در افزودن کتاب:", error);
     }
@@ -125,54 +157,61 @@ export default function AddBook() {
     setFile(null);
   };
 
-  useEffect(() => {
-    if (title && author && year && genre && summary && croppedImage) {
-      setIsSubmitDisabled(false);
-    } else {
-      setIsSubmitDisabled(true);
-    }
-  }, [title, author, year, genre, summary, croppedImage]);
-
 
   return (
     <>
       <Header />
       <div className="container mx-auto m-5 p-5 pt-10 pb-0 bg-white rounded-md">
         <div className="grid md:grid-cols-3 sm:grid-col-6 grid-cols-2 gap-4">
-          <input
-            className="border-2 border-gray-300 hover:bg-gray-200 rounded-md bg-gray-300 placeholder:text-black py-2 px-3 h-fit"
-            type="text"
-            placeholder="عنوان"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <input
-            className="border-2 border-gray-300 hover:bg-gray-200 rounded-md bg-gray-300 placeholder:text-black py-2 px-3 h-fit"
-            type="text"
-            placeholder="نویسنده"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-          />
-          <input
-            className="border-2 border-gray-300 hover:bg-gray-200 rounded-md bg-gray-300 placeholder:text-black py-2 px-3 h-fit fa-number"
-            type="text"
-            placeholder="سال انتشار"
-            value={year}
-            onChange={(e) => setYear(e.target.value)}
-          />
-          <input
-            className="border-2 border-gray-300 hover:bg-gray-200 rounded-md bg-gray-300 placeholder:text-black py-2 px-3 h-fit"
-            type="text"
-            placeholder="ژانر"
-            value={genre}
-            onChange={(e) => setGenre(e.target.value)}
-          />
-          <textarea
-            className="border-2 border-gray-300 hover:bg-gray-200 rounded-md bg-gray-300 placeholder:text-black py-2 px-3 resize-none h-fit"
-            placeholder="خلاصه کتاب"
-            value={summary}
-            onChange={(e) => setSummary(e.target.value)}
-          ></textarea>
+          <div className="flex-row">
+            <input
+              className="border-2 border-gray-300 hover:bg-gray-200 rounded-md bg-gray-300 placeholder:text-black py-2 px-3 h-fit inline w-full"
+              type="text"
+              placeholder="عنوان"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            {errors.title && <span className="text-red-500 text-xs inline">{errors.title}</span>}
+          </div>
+          <div className="flex-row">
+            <input
+              className="border-2 border-gray-300 hover:bg-gray-200 rounded-md bg-gray-300 placeholder:text-black py-2 px-3 h-fit inline w-full"
+              type="text"
+              placeholder="نویسنده"
+              value={author}
+              onChange={(e) => setAuthor(e.target.value)}
+            />
+            {errors.author && <span className="text-red-500 text-xs inline">{errors.author}</span>}
+          </div>
+          <div className="flex-row">
+            <input
+              className="border-2 border-gray-300 hover:bg-gray-200 rounded-md bg-gray-300 placeholder:text-black py-2 px-3 h-fit inline w-full fa-number"
+              type="text"
+              placeholder="سال انتشار"
+              value={year}
+              onChange={(e) => setYear(e.target.value)}
+            />
+            {errors.year && <span className="text-red-500 text-xs inline">{errors.year}</span>}
+          </div>
+          <div className="flex-row">
+            <input
+              className="border-2 border-gray-300 hover:bg-gray-200 rounded-md bg-gray-300 placeholder:text-black py-2 px-3 h-fit inline w-full"
+              type="text"
+              placeholder="ژانر"
+              value={genre}
+              onChange={(e) => setGenre(e.target.value)}
+            />
+            {errors.genre && <span className="text-red-500 text-xs inline">{errors.genre}</span>}
+          </div>
+          <div className="flex-row">
+            <textarea
+              className="border-2 border-gray-300 hover:bg-gray-200 rounded-md bg-gray-300 placeholder:text-black py-2 px-3 resize-none h-fit inline w-full"
+              placeholder="خلاصه کتاب"
+              value={summary}
+              onChange={(e) => setSummary(e.target.value)}
+            ></textarea>
+            {errors.summary && <span className="text-red-500 text-xs inline">{errors.summary}</span>}
+          </div>
           <div className="mt-4">
           {croppedImage &&(
                   <Image
@@ -184,20 +223,23 @@ export default function AddBook() {
                     style={{width:"100%"}}
                   />
               )}
-          <button
-            className="bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-md text-white w-[49%] ml-2"
-            onClick={() => setModalIsOpen(true)}
-          >
-            انتخاب فایل
-          </button>
-          {imageSrc && 
-            <button
-              className="bg-red-500 hover:bg-red-400 px-4 py-2 rounded-md text-white mt-4 w-[49%]"
-              onClick={handleRemoveImage}
-            >
-              حذف عکس
-            </button>
-          }
+              <div className="flex-row">
+                <button
+                  className="bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-md text-white w-[49%] ml-2"
+                  onClick={() => setModalIsOpen(true)}
+                >
+                  انتخاب فایل
+                </button>
+                {errors.file && <p className="text-red-500 text-xs">{errors.file}</p>}
+                {imageSrc && 
+                  <button
+                    className="bg-red-500 hover:bg-red-400 px-4 py-2 rounded-md text-white mt-4 w-[49%]"
+                    onClick={handleRemoveImage}
+                  >
+                    حذف عکس
+                  </button>
+                }
+              </div>
           </div>
         </div>
 
@@ -266,7 +308,6 @@ export default function AddBook() {
         <button
           className="bg-green-700 hover:bg-green-600 px-4 py-2 my-4 rounded-md text-white"
           onClick={handleSubmit}
-          disabled={isSubmitDisabled}
         >
           ثبت
         </button>
