@@ -111,7 +111,7 @@ export default function BooksPage() {
 
   return (
     <>
-    <div className="container mx-auto py-5 px-2">
+    <div className="container mx-auto py-5">
       <h1 className="text-2xl border-r-4 pr-4 mb-5 border-red-700">لیست کتاب ها <span className='fa-number'>({books.length})</span></h1>
     </div>
     {books.length===0 && (

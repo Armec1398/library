@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="container mx-auto py-5">
+      <div className="container mx-auto py-5  px-2">
         <Books />
       </div>
       
