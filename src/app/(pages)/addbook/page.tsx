@@ -124,7 +124,7 @@ export default function AddBook() {
     };
 
     try {
-      const response = await axios.post("http://localhost:5000/books", newBook);
+      const response = await axios.post("/api/books", newBook);
       setBooks((prevBooks) => [...prevBooks, response.data]);
       alert("کتاب با موفقیت ثبت شد!");
 
@@ -225,7 +225,7 @@ export default function AddBook() {
               )}
               <div className="flex-row">
                 <button
-                  className="bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-md text-white w-[49%] ml-2"
+                  className="bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-md text-white w-full sm:w-[49%] ml-2"
                   onClick={() => setModalIsOpen(true)}
                 >
                   انتخاب فایل
@@ -233,7 +233,7 @@ export default function AddBook() {
                 {errors.file && <p className="text-red-500 text-xs">{errors.file}</p>}
                 {imageSrc && 
                   <button
-                    className="bg-red-500 hover:bg-red-400 px-4 py-2 rounded-md text-white mt-4 w-[49%]"
+                    className="bg-red-500 hover:bg-red-400 px-4 py-2 rounded-md text-white mt-4 w-full sm:w-[49%]"
                     onClick={handleRemoveImage}
                   >
                     حذف عکس
