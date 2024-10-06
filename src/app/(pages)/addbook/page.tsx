@@ -144,8 +144,12 @@ export default function AddBook() {
         summary: "",
         file: "",
       });
-    } catch (error) {
-      console.error("خطا در افزودن کتاب:", error);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        console.error('خطا در افزودن کتاب:', error.response?.data || error.message);
+      } else {
+        console.error('خطای ناشناخته:', error);
+      }
     }
   };
 
