@@ -124,7 +124,7 @@ export default function AddBook() {
     };
 
     try {
-      const response = await axios.post("/api/books", newBook);
+      const response = await axios.post("http://localhost:5000/books", newBook);
       setBooks((prevBooks) => [...prevBooks, response.data]);
       alert("کتاب با موفقیت ثبت شد!");
 
@@ -144,12 +144,8 @@ export default function AddBook() {
         summary: "",
         file: "",
       });
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error('خطا در افزودن کتاب:', error.response?.data || error.message);
-      } else {
-        console.error('خطای ناشناخته:', error);
-      }
+    } catch (error) {
+      console.error("خطا در افزودن کتاب:", error);
     }
   };
 

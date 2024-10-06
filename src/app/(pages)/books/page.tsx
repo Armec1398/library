@@ -26,7 +26,7 @@ export default function BooksPage() {
   const fetchBooks = async () => {
     setLoading(true);
     await axios
-      .get('/api/books')
+      .get('http://localhost:5000/books')
       .then((res) => {
         setBooks(res.data);
       })
@@ -44,7 +44,7 @@ export default function BooksPage() {
 
   const handleDelete = async (id: number) => {
     try {
-      await axios.delete(`/api/books/${id}`);
+      await axios.delete(`http://localhost:5000/books/${id}`);
       setBooks(books.filter((book) => book.id !== id));
     } catch (error) {
       console.error('خطا در حذف کتاب:', error);
@@ -68,7 +68,7 @@ export default function BooksPage() {
   const handleEditSubmit = async () => {
     if (editFormData) {
       try {
-        await axios.put(`/api/books/${editBookId}`, editFormData);
+        await axios.put(`http://localhost:5000/books/${editBookId}`, editFormData);
         setBooks(
           books.map((book) =>
             book.id === editBookId ? { ...editFormData, id: editBookId } : book
